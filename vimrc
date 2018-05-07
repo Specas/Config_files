@@ -1,5 +1,21 @@
 "User vim configuration
 
+"Vundle configuration-------------------------------------------------
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim/
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'scrooloose/nerdtree'
+
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+
+call vundle#end()
+filetype plugin indent on
+"---------------------------------------------------------------------
+
 "User functions
 
 "Toggling relative numbering
@@ -11,6 +27,10 @@ function! ToggleRelativeNumbering()
         set relativenumber
     endif
 endfunc
+
+"Plugin specific
+autocmd vimenter * NERDTree
+
 
 " Colorscheme
 
@@ -26,6 +46,8 @@ set number
 let line_number_width=3
 execute "set numberwidth=".line_number_width
 
+"Text wrap column size
+set textwidth=200
 "Set tab spacing
 set tabstop=4
 set shiftwidth=4
@@ -34,9 +56,6 @@ set expandtab
 
 "Highlight current line
 set cursorline
-
-"Filetype specific indent files
-filetype indent on
 
 "Visual autocomplete for command menu
 set wildmenu
@@ -82,9 +101,14 @@ nnoremap <leader>s :mksession ~/.vim/sessions/current.vim<CR>
 "Calling toggle relative numbering
 nnoremap <c-t> :call ToggleRelativeNumbering()<CR> 
 
+"Switch windows
+nnoremap <leader>wi <c-w>
+"Toggle NERDTree
+nnoremap <leader>nt :NERDTreeToggle<CR>
 
 
-
+"Run python
+autocmd FileType python nnoremap <buffer> <leader>b :exec '!clear; python' shellescape(@%, 1)<CR>
 
 
 
