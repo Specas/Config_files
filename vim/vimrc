@@ -31,23 +31,23 @@ endfunc
 "Plugin specific
 autocmd vimenter * NERDTree
 
+"Close vim if the only window left open is NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " Colorscheme
-
 syntax enable
-colorscheme minimalist
+colorscheme monokai
 
 "Set line numbering
-
 set number
 
 "Set line number width
-
 let line_number_width=3
 execute "set numberwidth=".line_number_width
 
 "Text wrap column size
 set textwidth=200
+
 "Set tab spacing
 set tabstop=4
 set shiftwidth=4
@@ -70,7 +70,7 @@ set showmatch
 set incsearch
 
 "Highlight matches
-set hlsearch
+set nohlsearch
 
 "Set leader key
 let mapleader=","
@@ -101,11 +101,41 @@ nnoremap <leader>s :mksession ~/.vim/sessions/current.vim<CR>
 "Calling toggle relative numbering
 nnoremap <c-t> :call ToggleRelativeNumbering()<CR> 
 
-"Switch windows
+"Activate window switching
 nnoremap <leader>wi <c-w>
+
+"Switch to specific window
+nnoremap wh <c-w>h
+nnoremap wl <c-w>l
+nnoremap wj <c-w>j
+nnoremap wk <c-w>k
+
 "Toggle NERDTree
 nnoremap <leader>nt :NERDTreeToggle<CR>
 
+"Scroll down 25 lines
+nnoremap <leader>d 25<c-e>
+
+"Scroll up 25 lines
+nnoremap <leader>e 25<c-y>
+
+"Move to the next tab. 'n' and 'p' are used as alt-h causes the help menu to open in GVim
+nnoremap <A-n> :tabn<CR>
+
+"Move to the previous tab
+nnoremap <A-p> :tabp<CR>
+
+"Close tab
+nnoremap <A-k> :tabclose<CR>
+
+"Open window in a new tab
+nnoremap <A-j> :tabedit %<CR>
+
+"Switch to the next buffer
+nnoremap <leader>bn :bn<CR>
+
+"Switch to the previous buffer
+nnoremap <leader>bp :bp<CR>
 
 "Run python
 autocmd FileType python nnoremap <buffer> <leader>b :exec '!clear; python' shellescape(@%, 1)<CR>
