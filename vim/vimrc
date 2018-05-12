@@ -87,6 +87,9 @@ set writebackup
 "Saving file
 nnoremap <leader>w :w<CR>
 
+"Closing file
+nnoremap <leader>q :q<CR>
+
 "Sourcing vimrc
 nnoremap <leader>so :source $MYVIMRC<CR>
 
@@ -113,6 +116,10 @@ nnoremap wk <c-w>k
 "Toggle NERDTree
 nnoremap <leader>nt :NERDTreeToggle<CR>
 
+"Open split to the right and bottom
+set splitright
+set splitbelow
+
 "Scroll down 25 lines
 nnoremap <leader>d 25<c-e>
 
@@ -120,16 +127,16 @@ nnoremap <leader>d 25<c-e>
 nnoremap <leader>e 25<c-y>
 
 "Move to the next tab. 'n' and 'p' are used as alt-h causes the help menu to open in GVim
-nnoremap <A-n> :tabn<CR>
+nnoremap tn :tabn<CR>
 
 "Move to the previous tab
-nnoremap <A-p> :tabp<CR>
+nnoremap tp :tabp<CR>
 
 "Close tab
-nnoremap <A-k> :tabclose<CR>
+nnoremap tk :tabclose<CR>
 
 "Open window in a new tab
-nnoremap <A-j> :tabedit %<CR>
+nnoremap tj :tabedit %<CR>
 
 "Switch to the next buffer
 nnoremap <leader>bn :bn<CR>
