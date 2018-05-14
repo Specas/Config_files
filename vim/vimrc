@@ -29,10 +29,24 @@ function! ToggleRelativeNumbering()
 endfunc
 
 "Plugin specific
+
+"NERDTree configurations --------------------------------------------------------------------------------------------------
+"Toggle NERDTree
+nnoremap <leader>nt :NERDTreeToggle<CR>
+"
+"Ignoring files
+let NERDTreeIgnore = ['\.pyc$']
+
+"Open split to the right and bottom
+set splitright
+set splitbelow
+
 autocmd vimenter * NERDTree
 
 "Close vim if the only window left open is NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+"NERDTree configuration ends ----------------------------------------------------------------------------------------------
 
 " Colorscheme
 syntax enable
@@ -113,13 +127,6 @@ nnoremap wl <c-w>l
 nnoremap wj <c-w>j
 nnoremap wk <c-w>k
 
-"Toggle NERDTree
-nnoremap <leader>nt :NERDTreeToggle<CR>
-
-"Open split to the right and bottom
-set splitright
-set splitbelow
-
 "Scroll down 25 lines
 nnoremap <leader>d 25<c-e>
 
@@ -127,10 +134,10 @@ nnoremap <leader>d 25<c-e>
 nnoremap <leader>e 25<c-y>
 
 "Move to the next tab. 'n' and 'p' are used as alt-h causes the help menu to open in GVim
-nnoremap tn :tabn<CR>
+nnoremap tl :tabn<CR>
 
 "Move to the previous tab
-nnoremap tp :tabp<CR>
+nnoremap th :tabp<CR>
 
 "Close tab
 nnoremap tk :tabclose<CR>
