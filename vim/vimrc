@@ -111,6 +111,9 @@ set writebackup
 "Saving previous file cursor location and buffers
 set viminfo='10,\"100,:20,%,n~/.viminfo
 
+"Setting fold options
+set foldmethod=marker
+
 "Remaps
 
 "Saving file
