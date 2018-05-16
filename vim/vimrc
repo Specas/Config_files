@@ -28,6 +28,19 @@ function! ToggleRelativeNumbering()
     endif
 endfunc
 
+"Restoring cursor positions
+function! ResCur()
+    if line("'\"")<=line("$")
+        normal! g`"
+        return 1 
+    endif
+endfunction
+
+augroup resCur
+    autocmd!
+    autocmd BufWinEnter * call ResCur()
+augroup END
+
 "Plugin specific
 
 "NERDTree configurations --------------------------------------------------------------------------------------------------
@@ -95,6 +108,8 @@ set backupdir=~/.vim/.backup//
 set directory=~/.vim/.swap//
 set writebackup
 
+"Saving previous file cursor location and buffers
+set viminfo='10,\"100,:20,%,n~/.viminfo
 
 "Remaps
 
@@ -154,7 +169,9 @@ nnoremap <leader>bp :bp<CR>
 "Run python
 autocmd FileType python nnoremap <buffer> <leader>b :exec '!clear; python' shellescape(@%, 1)<CR>
 
-
+"Sourcing files and vimballs
+"Source supertab
+source ~/.vim/vimball/supertab.vmb
 
 
 
