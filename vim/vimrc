@@ -136,6 +136,9 @@ nnoremap <leader>s :mksession ~/.vim/sessions/current.vim<CR>
 "Calling toggle relative numbering
 nnoremap <c-t> :call ToggleRelativeNumbering()<CR> 
 
+"Enter a new line and move to normal mode
+nnoremap <leader>o o<Esc>
+
 "Activate window switching
 nnoremap <leader>wi <c-w>
 
