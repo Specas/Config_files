@@ -139,6 +139,9 @@ nnoremap <c-t> :call ToggleRelativeNumbering()<CR>
 "Enter a new line and move to normal mode
 nnoremap <leader>o o<Esc>
 
+"Insert a line above and move to normal mode
+nnoremap <leader>O O<Esc>
+
 "Activate window switching
 nnoremap <leader>wi <c-w>
 
@@ -165,6 +168,9 @@ nnoremap tk :tabclose<CR>
 
 "Open window in a new tab
 nnoremap tj :tabedit %<CR>
+
+"Open new tab
+nnoremap tt :tabedit <CR>
 
 "Switch to the next buffer
 nnoremap <leader>bn :bn<CR>
