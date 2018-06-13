@@ -137,10 +137,10 @@ nnoremap <leader>s :mksession ~/.vim/sessions/current.vim<CR>
 nnoremap <c-t> :call ToggleRelativeNumbering()<CR> 
 
 "Enter a new line and move to normal mode
-nnoremap <leader>o o<Esc>
+nnoremap oo o<Esc>
 
 "Insert a line above and move to normal mode
-nnoremap <leader>O O<Esc>
+nnoremap OO O<Esc>
 
 "Activate window switching
 nnoremap <leader>wi <c-w>
