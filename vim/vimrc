@@ -76,9 +76,9 @@ execute "set numberwidth=".line_number_width
 set textwidth=200
 
 "Set tab spacing
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
 set expandtab
 
 "Highlight current line
@@ -128,9 +128,14 @@ nnoremap <leader>so :source $MYVIMRC<CR>
 "Saving file and sourcing
 nnoremap <leader>sso :w<CR> :source $MYVIMRC<CR>
 
-"Save session
-nnoremap <leader>s :mksession ~/.vim/sessions/current.vim<CR>
+"Save and restore session
+"nnoremap <F2> :mksession! ~/.vim/sessions/vim_session<CR>
+"nnoremap <F3> :source ~/.vim/sessions/vim_session<CR>
+autocmd VimLeave * NERDTreeClose
+autocmd VimLeave * :mksession! ~/.vim/sessions/vim_session<CR>
 
+autocmd VimEnter * :source ~/.vim/sessions/vim_session<CR>
+autocmd VimEnter * NERDTree
 "Remaps to function calls
 
 "Calling toggle relative numbering
@@ -180,6 +185,7 @@ nnoremap <leader>bp :bp<CR>
 
 "Run python
 autocmd FileType python nnoremap <buffer> <leader>b :exec '!clear; python' shellescape(@%, 1)<CR>
+autocmd FileType python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
 
 "Sourcing files and vimballs
 "Source supertab
