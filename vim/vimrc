@@ -189,7 +189,7 @@ autocmd FileType python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
 
 "Sourcing files and vimballs
 "Source supertab
-source ~/.vim/vimball/supertab.vmb
+source ~/.vim/plugin/supertab.vim
 
 
 
