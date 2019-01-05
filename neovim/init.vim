@@ -57,6 +57,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sleuth'
 Plug 'wesQ3/vim-windowswap'
 Plug 'valloric/YouCompleteMe'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-session'
 
 " If you add additional "Plug 'user/repo'" lines in the file specified by
 " s:local_plugins_file, those plugins will be loaded as well.
@@ -124,7 +126,8 @@ set showtabline=2
 "-------------------
 " vim-airline-themes
 "-------------------
-let g:airline_theme='sol'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='bubblegum'
 
 "-----
 " gitv
@@ -136,7 +139,7 @@ nnoremap <leader>gv :Gitv<cr>
 " nerdtree
 "---------
 " Launch NerdTree (file system viewer).
-nnoremap <leader>nt :NERDTree<cr>
+nnoremap <leader>nt :NERDTreeToggle<cr>
 " Launch NerdTree with the current file selected.
 nnoremap <leader>nf :NERDTreeFind<cr>
 
@@ -149,7 +152,7 @@ nnoremap <leader>gd :Gdiff<cr>
 nnoremap <leader>gs :Gstatus<cr>
 
 " Fold method
-set foldmethod=syntax
+"set foldmethod=syntax
 
 "-----------------
 " vim-clang-format
@@ -167,6 +170,13 @@ let g:windowswap_map_keys = 0 "prevent default bindings
 " Swap the contents of two windows. Press <leader>ss while in the first
 " window, then navigate to the second window and press <leader>ss again.
 nnoremap <silent> <leader>ss :call WindowSwap#EasyWindowSwap()<CR>
+
+"------------
+" vim-session
+"------------
+let g:session_dir = '~/.config/nvim/sessions'
+exec 'nnoremap <Leader>sse :mksession! ' . g:session_dir . '/*.vim<C-D><BS><BS><BS><BS><BS>'
+exec 'nnoremap <Leader>lse :source ' . g:session_dir. '/*.vim<C-D><BS><BS><BS><BS><BS>'
 
 "===================================================================
 " Other settings/mappings that are useful when working with Drake
@@ -230,15 +240,56 @@ inoremap <leader>K <Esc><c-w>k
 inoremap <leader>H <Esc><c-w>h
 inoremap <leader>L <Esc><c-w>l
 " Save the current file.
-nnoremap <leader>ww :w<cr>
+nnoremap <leader>w :w<cr>
 " Close the current file.
-nnoremap <leader>qq :q<cr>
+nnoremap <leader>q :q<cr>
 " Save and close the current file.
 nnoremap <leader>wq :w<cr>:q<cr>
+"Sourcing vimrc
+nnoremap <leader>so :source ~/.config/nvim/init.vim<CR>
+"Saving file and sourcing
+nnoremap <leader>sso :w<CR> :source ~/.config/nvim/init.vim<CR>
 " Close all files.
 nnoremap <leader>qa :qa<cr>
 " Use <leader><leader> as a replacement for ":".
 nnoremap <leader><leader> :
+
+" Switch to specific window
+nnoremap wh <c-w>h
+nnoremap wl <c-w>l
+nnoremap wj <c-w>j
+nnoremap wk <c-w>k
+
+" Scroll down 25 lines
+nnoremap <leader>d 25<c-e>
+
+" Scroll up 25 lines
+nnoremap <leader>e 25<c-y>
+
+" Moving between tabs
+" Move to the next tab
+nnoremap tl :tabn<CR>
+
+" Move to the previous tab
+nnoremap th :tabp<CR>
+
+" Close tab
+nnoremap tk :tabclose<CR>
+
+" Open window in a new tab
+nnoremap tj :tabedit %<CR>
+
+" Open new tab
+nnoremap tt :tabedit <CR>
+
+" Switch to the next buffer
+nnoremap <leader>bh :bn<CR>
+
+" Switch to the previous buffer
+nnoremap <leader>bl :bp<CR>
+
+" Close the buffer
+nnoremap <leader>bk :bd<CR>
 
 "----------------------------------
 " Terminal management (Neovim only)
