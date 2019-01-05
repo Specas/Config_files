@@ -129,12 +129,10 @@ nnoremap <leader>so :source $MYVIMRC<CR>
 nnoremap <leader>sso :w<CR> :source $MYVIMRC<CR>
 
 "Save and restore session
-"nnoremap <F2> :mksession! ~/.vim/sessions/vim_session<CR>
-"nnoremap <F3> :source ~/.vim/sessions/vim_session<CR>
-autocmd VimLeave * NERDTreeClose
-autocmd VimLeave * :mksession! ~/.vim/sessions/vim_session<CR>
+nnoremap <F2> :mksession! ~/.vim/sessions/vim_session.vim<CR>
+nnoremap <F3> :source ~/.vim/sessions/vim_session.vim<CR>
 
-autocmd VimEnter * :source ~/.vim/sessions/vim_session<CR>
+autocmd VimLeave * NERDTreeClose
 autocmd VimEnter * NERDTree
 "Remaps to function calls
 
