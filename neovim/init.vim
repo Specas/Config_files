@@ -59,6 +59,11 @@ Plug 'wesQ3/vim-windowswap'
 Plug 'valloric/YouCompleteMe'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
+Plug 'nvie/vim-flake8'
+" Plug 'tell-k/vim-autopep8'
+Plug 'google/vim-maktaba'
+Plug 'google/vim-codefmt'
+Plug 'google/vim-glaive'
 
 " If you add additional "Plug 'user/repo'" lines in the file specified by
 " s:local_plugins_file, those plugins will be loaded as well.
@@ -155,6 +160,11 @@ nnoremap <leader>gs :Gstatus<cr>
 "set foldmethod=syntax
 
 "-----------------
+"vim-youcompleteme
+"-----------------
+let g:ycm_global_ycm_extra_conf = '/home/shrenikm/bazel_installer/bazel-compilation-database-0.2.2/.ycm_extra_conf.py'
+
+"-----------------
 " vim-clang-format
 "-----------------
 let g:clang_format#detect_style_file=1
@@ -169,7 +179,7 @@ autocmd FileType c,cpp,objc vnoremap <buffer><leader>cf :ClangFormat<CR>
 let g:windowswap_map_keys = 0 "prevent default bindings
 " Swap the contents of two windows. Press <leader>ss while in the first
 " window, then navigate to the second window and press <leader>ss again.
-nnoremap <silent> <leader>ss :call WindowSwap#EasyWindowSwap()<CR>
+nnoremap <silent> <leader>pp :call WindowSwap#EasyWindowSwap()<CR>
 
 "------------
 " vim-session
@@ -183,9 +193,25 @@ exec 'nnoremap <Leader>lse :source ' . g:session_dir. '/*.vim<C-D><BS><BS><BS><B
 "===================================================================
 
 "----------------------------
-" Highlight the 80-th column.
+" Highlight the 80-th column for cpp.
 "----------------------------
 autocmd FileType c,cpp set cc=80
+
+"----------------------------
+" Highlight the 79-th column for python.
+"----------------------------
+autocmd FileType python set cc=79
+
+"----------------------------
+" Set python autoformatter.
+"----------------------------
+autocmd FileType python AutoFormatBuffer autopep8
+
+
+"----------------------------
+" Set a mapping for autopep8.
+"----------------------------
+nnoremap <F8> :FormatCode<CR>
 
 "-------------------------------------------
 " Ignore CamelCase words when spell checking
@@ -244,43 +270,49 @@ nnoremap <leader>w :w<cr>
 " Close the current file.
 nnoremap <leader>q :q<cr>
 " Save and close the current file.
-nnoremap <leader>wq :w<cr>:q<cr>
+" nnoremap <leader>wq :w<cr>:q<cr>
 "Sourcing vimrc
 nnoremap <leader>so :source ~/.config/nvim/init.vim<CR>
 "Saving file and sourcing
 nnoremap <leader>sso :w<CR> :source ~/.config/nvim/init.vim<CR>
 " Close all files.
-nnoremap <leader>qa :qa<cr>
+" nnoremap <leader>qa :qa<cr>
 " Use <leader><leader> as a replacement for ":".
 nnoremap <leader><leader> :
 
 " Switch to specific window
-nnoremap wh <c-w>h
-nnoremap wl <c-w>l
-nnoremap wj <c-w>j
-nnoremap wk <c-w>k
+nnoremap <leader>sh <c-w>h
+nnoremap <leader>sl <c-w>l
+nnoremap <leader>sj <c-w>j
+nnoremap <leader>sk <c-w>k
 
 " Scroll down 25 lines
-nnoremap <leader>d 25<c-e>
+nnoremap <leader>md 25<c-e>
 
 " Scroll up 25 lines
-nnoremap <leader>e 25<c-y>
+nnoremap <leader>me 25<c-y>
+
+" Insert a line below and go to normal mode
+nnoremap <leader>no o<Esc>
+
+" Insert a line above and go to normal mode
+nnoremap <leader>nO O<Esc>
 
 " Moving between tabs
 " Move to the next tab
-nnoremap tl :tabn<CR>
+nnoremap <leader>tl :tabn<CR>
 
 " Move to the previous tab
-nnoremap th :tabp<CR>
+nnoremap <leader>th :tabp<CR>
 
 " Close tab
-nnoremap tk :tabclose<CR>
+nnoremap <leader>tk :tabclose<CR>
 
 " Open window in a new tab
-nnoremap tj :tabedit %<CR>
+nnoremap <leader>tj :tabedit %<CR>
 
 " Open new tab
-nnoremap tt :tabedit <CR>
+nnoremap <leader>tt :tabedit <CR>
 
 " Switch to the next buffer
 nnoremap <leader>bh :bn<CR>
@@ -291,27 +323,39 @@ nnoremap <leader>bl :bp<CR>
 " Close the buffer
 nnoremap <leader>bk :bd<CR>
 
+" Tab size
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set expandtab
+
+" Mouse
+set mouse=a
+
+" Split location
+set splitright
+
 "----------------------------------
 " Terminal management (Neovim only)
 "----------------------------------
-if has('nvim')
-    " Open a new terminal in a horizontal split.
-    nnoremap <leader>tj :Term<cr><C-\><C-n><c-w>x<c-w>ji
-    " Open a new terminal in a vertical split.
-    nnoremap <leader>tl :VTerm<cr>
-    " Go from TERMINAL mode to NORMAL mode.
-    tnoremap <leader>tq <C-\><C-n>
-    " Go to the next tab while in TERMINAL mode.
-    tnoremap <leader>gt <C-\><C-n>gt
-    " Move to an adjacent window while in TERMINAL mode.
-    tnoremap <leader>J <C-\><C-n><c-w>j<Esc>
-    tnoremap <leader>K <C-\><C-n><c-w>k<Esc>
-    tnoremap <leader>H <C-\><C-n><c-w>h<Esc>
-    tnoremap <leader>L <C-\><C-n><c-w>l<Esc>
-    let g:disable_key_mappings=1
-    set splitright
-    autocmd TermOpen * setlocal nonumber
-endif
+"if has('nvim')
+"    " Open a new terminal in a horizontal split.
+"    nnoremap <leader>tj :Term<cr><C-\><C-n><c-w>x<c-w>ji
+"    " Open a new terminal in a vertical split.
+"    nnoremap <leader>tl :VTerm<cr>
+"    " Go from TERMINAL mode to NORMAL mode.
+"    tnoremap <leader>tq <C-\><C-n>
+"    " Go to the next tab while in TERMINAL mode.
+"    tnoremap <leader>gt <C-\><C-n>gt
+"    " Move to an adjacent window while in TERMINAL mode.
+"    tnoremap <leader>J <C-\><C-n><c-w>j<Esc>
+"    tnoremap <leader>K <C-\><C-n><c-w>k<Esc>
+"    tnoremap <leader>H <C-\><C-n><c-w>h<Esc>
+"    tnoremap <leader>L <C-\><C-n><c-w>l<Esc>
+"    let g:disable_key_mappings=1
+"    set splitright
+"    autocmd TermOpen * setlocal nonumber
+"endif
 
 "----------------------
 " Edit/source this file
