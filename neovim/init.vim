@@ -46,7 +46,6 @@ Plug 'scrooloose/nerdtree'
 Plug 'tyok/nerdtree-ack'
 Plug 'mklabs/split-term.vim'
 "Plug 'tpope/tpope-vim-abolish'
-Plug 'SirVer/ultisnips'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'moll/vim-bbye'
@@ -56,14 +55,16 @@ Plug 'tpope/vim-fugitive'
 "Plug 'weynhamz/vim-plugin-minibufexpl'
 Plug 'tpope/vim-sleuth'
 Plug 'wesQ3/vim-windowswap'
-Plug 'valloric/YouCompleteMe'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
 Plug 'nvie/vim-flake8'
-" Plug 'tell-k/vim-autopep8'
+Plug 'tell-k/vim-autopep8'
 Plug 'google/vim-maktaba'
 Plug 'google/vim-codefmt'
 Plug 'google/vim-glaive'
+Plug 'heavenshell/vim-pydocstring'
+Plug 'Shougo/deoplete.nvim'
+Plug 'zchee/deoplete-clang'
 
 " If you add additional "Plug 'user/repo'" lines in the file specified by
 " s:local_plugins_file, those plugins will be loaded as well.
@@ -147,6 +148,8 @@ nnoremap <leader>gv :Gitv<cr>
 nnoremap <leader>nt :NERDTreeToggle<cr>
 " Launch NerdTree with the current file selected.
 nnoremap <leader>nf :NERDTreeFind<cr>
+" Ignore .pyc files
+let NERDTreeIgnore = ['\.pyc$']
 
 "-------------
 " vim-fugitive
@@ -158,11 +161,6 @@ nnoremap <leader>gs :Gstatus<cr>
 
 " Fold method
 "set foldmethod=syntax
-
-"-----------------
-"vim-youcompleteme
-"-----------------
-let g:ycm_global_ycm_extra_conf = '/home/shrenikm/bazel_installer/bazel-compilation-database-0.2.2/.ycm_extra_conf.py'
 
 "-----------------
 " vim-clang-format
@@ -188,8 +186,16 @@ let g:session_dir = '~/.config/nvim/sessions'
 exec 'nnoremap <Leader>sse :mksession! ' . g:session_dir . '/*.vim<C-D><BS><BS><BS><BS><BS>'
 exec 'nnoremap <Leader>lse :source ' . g:session_dir. '/*.vim<C-D><BS><BS><BS><BS><BS>'
 
-"===================================================================
-" Other settings/mappings that are useful when working with Drake
+"-----------------
+" deoplete
+"---------------
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources#clang#libclang_path='/usr/lib/llvm-6.0/lib/libclang-6.0.0.so'
+let g:deoplete#sources#clang#clang_header='/usr/lib/llvm-6.0/lib/libclang'
+
+" Map to tab through deoplete options.
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+
 "===================================================================
 
 "----------------------------
@@ -328,6 +334,17 @@ set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 set expandtab
+
+
+"----------------------------
+" Tab spacing for python.
+"----------------------------
+autocmd FileType python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
+
+"============================================
+" Pydocstring remap.
+"============================================
+nmap <silent> <F6> <Plug>(pydocstring)
 
 " Mouse
 set mouse=a
